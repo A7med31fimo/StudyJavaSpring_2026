@@ -1,13 +1,65 @@
+import Week1_Student_management_console_app.Class_lvl;
+import Week1_Student_management_console_app.Student_mangement;
+import Week1_Student_management_console_app.student;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+    Student_mangement sm = new Student_mangement();
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+    Scanner sc = new Scanner(System.in);
+    int cnt_id = 1;
+    while(true){
+        IO.println("Enter Your Options from below : ");
+        IO.println("For add std enter 1 : ");
+        IO.println("For delete std enter 2 : ");
+        IO.println("For Print all stds enter 3 : ");
+        int answer = sc.nextInt();
+        sc.nextLine();
+        switch (answer){
+            case 1 :
+            {
+                IO.println("Enter Your Name : ");
+                String name = sc.nextLine();
+                IO.println("Enter Your email : ");
+                String email = sc.nextLine();
+                int id = cnt_id++;
+                IO.println("Enter Your age : ");
+                int age = sc.nextInt();
+                sc.nextLine();
+                IO.println("Enter Your Class Level From below : ");
+                for(Class_lvl c_lvl : Class_lvl.values()){
+                    IO.println("if you "+c_lvl+"select "+c_lvl.getLevel());
+                }
+                int class_lvl =sc.nextInt();
+                sc.nextLine();
+                Class_lvl c = switch (class_lvl) {
+                    case 1 -> Class_lvl.First;
+                    case 2 -> Class_lvl.Second;
+                    case 3 -> Class_lvl.Third;
+                    default -> Class_lvl.Fourth;
+                };
+                student std = new student(name,email,id,age,c);
+                sm.addStudent(std);
+                break;
+            }
+            case 2 :
+            {
+                IO.println("select id of user you need to delete it : ");
+                sm.PrintAllStds();
+                int id = sc.nextInt();
+                sc.nextLine();
+                sm.delete(id);
+                break;
+            }
+            default:
+                sm.PrintAllStds();
+                break;
+        }
+        IO.println("Do You need Exit ? yes : no");
+        String ans = sc.nextLine();
+        if (Objects.equals(ans, "yes")){
+            break;
+        }
     }
 }
