@@ -34,9 +34,36 @@ package Week1_Student_management_console_app.Day3;
          2- Runtime polymorphism, or dynamic method dispatch,
           is an Object-Oriented Programming (OOP) concept
           where a method call is resolved at runtime rather than compile time
-         3- make the ref of parent refer to child obj
+         3- make the ref of parent refer to child obj as following
+             Animal a = new Dog();
+             a is ref type store in stack mem
+             new Dog() create obj  in heap mem
+             when create ref from parent the constructor of parent call first (Animal)
+             then constructor of child (Dog)
+             then method (sound)
+             and the sound method call from class which obj created from it.
+             a.sound();
+      ***************************************************************************
+      #4 Abstraction
+         1- the main goal is hide every thing in class method (implementation details)
+         2- show only the important parts only like headers of func's (behavior)
+         3 some important concepts achieved after work with abstract
+            1- Simplicity
+            2- Reduced Information Overload (don't dive in useless details just focus on important)
+            3- Maintainability & Flexibility
+            4- Code Reusability (by interface or abstract we can create good templates and use it)
+            5- Reducing Redundancy
+         4- abstract class can have some methods implementation not just abstract
+         5- single inheritance
+       ******************************************************************************
+       #5 Interface
+          1- Interface is Contract
+             Any class inherit it -> should implement all methods of it
+          2- fully abstraction
+          3- java support multiple inheritance
+
 */
 
 
-public class Employee {
+public class Explantion_oop_concepts {
 }
