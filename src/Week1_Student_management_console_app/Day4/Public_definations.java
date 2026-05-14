@@ -15,6 +15,7 @@
      └── Exception
            ├── RuntimeException
            └── Checked Exceptions ->IOException,SQLException
+     5- finally keyword used for close db or file after throw exception
  */
 static class InvalidAgeException extends Exception{
 
@@ -38,10 +39,15 @@ public static void main(String[] args) {
 //   } catch (Exception e) {
 //       IO.println(Arrays.toString(e.toString().split(":")));
 //   }
+    Scanner sc = new Scanner(System.in);
+    int age = sc.nextInt();
 
     try {
-        Valided.checkAge(13);
+        Valided.checkAge(age);
     }catch (InvalidAgeException e){
         IO.println(e.getMessage());
+    }finally{
+        sc.close();
+        IO.println("pls revise your age ");
     }
 }
