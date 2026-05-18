@@ -26,18 +26,18 @@ public class atm{
         if(quantity> this.current_salary){
           throw new validationException("this amount is bigger than available salary");
         }
-        this.current_salary-=quantity;
-        IO.println("successfully withdrowed your amount by "+quantity+"current_salary"+current_salary);
+        setCurrent_salary(current_salary-quantity);
+        IO.println("successfully withdrowed your amount by : "+quantity+"current_salary : "+current_salary);
     }
     public void deposit(int quantity) throws validationException{
         if(quantity>limitQuantity){
-            throw new validationException("this is bigger than from allowed limit");
+            throw new validationException("this is bigger than from allowed limit : "+getLimitQuantity());
         }
-        this.current_salary+=quantity;
-        IO.println("successfully deposited by "+quantity+"current_salary"+current_salary);
+        setCurrent_salary(current_salary+quantity);
+        IO.println("successfully deposited by : "+quantity+"current_salary : "+current_salary);
     }
 }
-void main() throws validationException {
+void main() {
    atm a = new atm(20000);
    while(true){
        IO.println("hi ");
@@ -49,19 +49,37 @@ void main() throws validationException {
 
        Scanner sc = new Scanner(System.in);
        int op = sc.nextInt();
+
        switch (op){
-           case 1 :
+           case 1 : {
                IO.println(a.getCurrent_salary());
+               break;
+           }
            case 2 : {
-               IO.println("Enter money need to deposit it");
+               IO.println("Enter money need to withdraw it");
                int amount = sc.nextInt();
-               a.withdraw(amount);
+               try {
+                   a.withdraw(amount);
+               }catch (validationException c){
+                   IO.println(c.getMessage());
+               }
+               break;
            }
            case 3 :{
                IO.println("Enter number need to deposit it ");
-               int amount =
+               int amount = sc.nextInt();
+               try {
+                   a.deposit(amount);
+               }catch (validationException c){
+                   IO.println(c.getMessage());
+               }
+               break;
+           }
+           default: {
+               IO.println("thank you for using my app");
            }
        }
-
+       if(op == 4)
+           break;
    }
 }
