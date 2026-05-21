@@ -2,7 +2,7 @@ package Week1_Student_management_console_app.Day1;
 
 import java.util.Objects;
 
-;
+
 public class student {
     private String name;
     private String email;
