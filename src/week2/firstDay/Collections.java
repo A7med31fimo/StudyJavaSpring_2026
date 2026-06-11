@@ -26,14 +26,27 @@
          FIFO
          queue is interface for
          ----> linkedlist , prioirty queue , arraydequeu
-
+         *****************************************
          ##interview question
          Why Queue reference with LinkedList?
             تقول:
             Queue is an interface and LinkedList is one implementation of that interface.
             We use Queue reference to follow polymorphism and program to interface instead of implementation, making the code more flexible and (loosely coupled)-> .
             معناها ان الكلاسات مش معتمده علي بعض واي تغيير مش هيأثر علي الترابط خالص
+         ******************************************
+         add vs offer in queue =>
+         (add) if failed return (IllegalStateException)
+         (offer) if failed return (false)
+         *******************************
+         remove vs poll in queue =>
+         (remove) if no element in q return (NoSuchElementException)
+         (poll) if no element in q return (null)
+         *************************************
+         element vs peek in queue
+         element() -> if there is no element (Exception)
+         peek()    -> if there is no element (null)
 
+         (offer , poll , peek)  safe version from  (add  , remove , element)
      */
 
     class ObjectComp implements Comparator<Object>{
@@ -127,6 +140,15 @@
 //        hm.put(4,"a7mos");
 //        IO.println(hm.containsKey(1));
         Queue<Integer> q = new LinkedList<>();
+        q.offer(1);
+        q.offer(2);
+        q.offer(3);
+        IO.println(q);
+        q.poll();
+        IO.println(q);
+        q.offer(4);
+        IO.println(q);
+
     }
 
 

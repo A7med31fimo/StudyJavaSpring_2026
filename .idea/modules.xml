@@ -5,4 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/StudyJavaSpring_2026.iml" filepath="$PROJECT_DIR$/StudyJavaSpring_2026.iml" />
     </modules>
   </component>
+    <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-api</artifactId>
+        <version>10.0.0</version> <!-- Replace with 8, 9, 10, or 11 depending on your server -->
+        <scope>provided</scope>
+    </dependency>
 </project>
