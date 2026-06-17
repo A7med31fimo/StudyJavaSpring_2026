@@ -1,13 +1,12 @@
 package week2.secondDay;
 
+
 import java.util.*;
 import java.util.regex.Pattern;
-
-import jakarta.validation.constraints.Email;
 class Student{
     private String name;
     private int id;
-    @Email
+
     private String email;
 
 
@@ -43,7 +42,7 @@ class Student{
 
     @Override
     public String toString() {
-        return "week2.secondDay.Student{" +
+        return "{" +
             "name='" + name + '\'' +
             ", id=" + id +
             ", email='" + email + '\'' +
@@ -111,32 +110,45 @@ class StudentManagementSystem {
         return true;
     }
 }
-class EmailValidator {
-    private static final Pattern EMAIL_PATTERN =
-        Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+class InputValidator {
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    private static final Pattern NAME_PATTERN  = Pattern.compile("^[a-zA-Z\\s'-]+$");
+    private static final Pattern ID_PATTERN = Pattern.compile("^[0-9]+$");
 
-    public static boolean isValid(String email) {
+    public static boolean isValidEmail(String email) {
         return email != null && EMAIL_PATTERN.matcher(email).matches();
+    }
+    public static boolean isValidName(String name) {
+        return name != null && NAME_PATTERN.matcher(name).matches();
+    }
+    public static boolean isValidId(String id) {
+        return id != null && ID_PATTERN.matcher(id).matches();
     }
 }
 class InvalidInputException extends Exception{
-
     public InvalidInputException(String msg) {
         super(msg);
     }
 }
- class Valided{
-    static void checkAge(int age) throws InvalidInputException {
-        if(age < 19){
-            throw new InvalidAgeException("Age must be +19");
+ class ValidedInputs{
+    static void checkName(Object Name) throws InvalidInputException {
+        if(!InputValidator.isValidName(Name.toString())){
+            throw new InvalidInputException("Invalid Name");
         }
         IO.println("Allowed");
     }
-     static void checkEmail(String email) throws InvalidInputException {
-
-         IO.println("Allowed");
-     }
-
+    static void checkEmail(Object Email) throws InvalidInputException {
+        if(!InputValidator.isValidEmail(Email.toString())){
+            throw new InvalidInputException("Invalid Email");
+        }
+        IO.println("Allowed");
+    }
+    static void checkId(Object Id) throws InvalidInputException {
+        if(!InputValidator.isValidId(Id.toString())){
+            throw new InvalidInputException("Invalid Id");
+        }
+        IO.println("Allowed");
+    }
  }
 public class Main1 {
 
@@ -157,13 +169,45 @@ public class Main1 {
             }
             switch (choice) {
                 case 1:{
-                    IO.println("Enter Student ID");
-                    int id = input.nextInt();
-                    IO.println("Enter Student Name");
-                    String name = input.next();
-                    IO.println("Enter Student Email");
-                    String email = input.next();
-                    sms.addStudent(new Student(id,name,email));
+                    String id = null;
+                    Object name=null;
+                    Object email=null;
+                    int [] check = new int[]{
+                        0,0,0
+                    };
+                    while (true) {
+
+                        try {
+                            if(check[0]!=1) {
+                                IO.println("Enter Student ID");
+                                id = input.next();
+                                ValidedInputs.checkId(id);
+                                check[0] = 1;
+                            }
+
+                            if(check[1]!=1)
+                            {
+                                IO.println("Enter Student Name");
+                                name = input.next();
+                                ValidedInputs.checkName(name);
+                                check[1] = 1;
+                            }
+                            if(check[2]!=1) {
+
+                                IO.println("Enter Student Email");
+                                email = input.next();
+                                ValidedInputs.checkEmail(email);
+                                check[2] = 1;
+                            }
+
+                        break;
+                        }catch (Exception e ){
+                            IO.println(e.getMessage());
+                        }
+
+                    }
+                    sms.addStudent(new Student(Integer.parseInt(id), (String) name, (String) email));
+
                 }
                 break;
                 case 2:{
