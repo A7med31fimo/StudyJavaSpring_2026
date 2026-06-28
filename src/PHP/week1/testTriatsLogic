@@ -1,0 +1,32 @@
+<?php
+
+trait LoggerTrait
+{
+    public function log(string $message): void
+    {
+        echo '[' . date('Y-m-d H:i:s') . '] ' . $message . PHP_EOL;
+    }
+}
+
+trait FormatterTrait
+{
+    public function formatMessage(string $message): string
+    {
+        return strtoupper($message);
+    }
+}
+
+class Application
+{
+    use LoggerTrait, FormatterTrait;
+
+    public function run(): void
+    {
+        $message = $this->formatMessage('Traits are useful in PHP');
+        $this->log($message);
+    }
+}
+
+$app = new Application();
+$app->run();
+                    
